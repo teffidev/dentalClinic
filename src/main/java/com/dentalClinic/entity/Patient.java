@@ -1,5 +1,7 @@
 package com.dentalClinic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -14,26 +16,52 @@ public class Patient {
     private Long id;
     private String name;
     private String lastname;
+    private String address;
     private String dni;
     private Date admissionDate;
 
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointments;
 
 
     public Patient() {
     }
 
-    public Patient(String name, String lastname, String dni, Date admissionDate) {
+    public Patient(String name, String lastname, String address, String dni, Date admissionDate) {
         this.name = name;
         this.lastname = lastname;
+        this.address = address;
         this.dni = dni;
         this.admissionDate = admissionDate;
     }
 
+    public Patient(Long id, String name, String lastname, String address, String dni, Date admissionDate) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.address = address;
+        this.dni = dni;
+        this.admissionDate = admissionDate;
+    }
+
+    public Patient(Long id, String name, String lastname, String address, String dni, Date admissionDate, List<Appointment> appointments) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.address = address;
+        this.dni = dni;
+        this.admissionDate = admissionDate;
+        this.appointments = appointments;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,6 +80,14 @@ public class Patient {
         this.lastname = lastname;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getDni() {
         return dni;
     }
@@ -68,14 +104,24 @@ public class Patient {
         this.admissionDate = admissionDate;
     }
 
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
                 ", dni='" + dni + '\'' +
                 ", admissionDate=" + admissionDate +
+                ", appointments=" + appointments +
                 '}';
     }
 }

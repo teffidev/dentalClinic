@@ -15,20 +15,34 @@ public class Appointment {
     private Long id;
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "dentist_id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dentist_id", nullable = false, referencedColumnName = "id")
     private Dentist dentist;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "patient_id")
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id", nullable = false, referencedColumnName = "id")
     private Patient patient;
 
     public Appointment() {
     }
 
+    public Appointment(Long id) {
+        this.id = id;
+    }
+
+    public Appointment(Dentist dentist, Patient patient) {
+        this.dentist = dentist;
+        this.patient = patient;
+    }
+
     public Appointment(Date date, Dentist dentist, Patient patient) {
+        this.date = date;
+        this.dentist = dentist;
+        this.patient = patient;
+    }
+
+    public Appointment(Long id, Date date, Dentist dentist, Patient patient) {
+        this.id = id;
         this.date = date;
         this.dentist = dentist;
         this.patient = patient;

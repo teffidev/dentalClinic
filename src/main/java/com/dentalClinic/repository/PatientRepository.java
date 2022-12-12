@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    @Query("SELECT p.dni FROM Patient p WHERE p.dni = ?1")
+    @Query("SELECT p.dni FROM Patient p WHERE p.dni = ?1") /*HQL-Spring Boot*/
     Optional<Patient> searchByDni(String dni);
 
 }

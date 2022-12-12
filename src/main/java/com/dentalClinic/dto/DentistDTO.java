@@ -6,15 +6,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DentistDTO {
 
+    private Long id;
     private String name;
     private String lastname;
 
     public DentistDTO() {
     }
 
-    public DentistDTO(String name, String lastname) {
+    public DentistDTO(Long id, String name, String lastname) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -36,7 +42,8 @@ public class DentistDTO {
     @Override
     public String toString() {
         return "DentistDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 '}';
     }

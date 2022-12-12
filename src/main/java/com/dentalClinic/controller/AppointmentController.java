@@ -1,5 +1,6 @@
 package com.dentalClinic.controller;
 
+import com.dentalClinic.dto.AppointmentDTO;
 import com.dentalClinic.entity.Appointment;
 import com.dentalClinic.exceptions.ErrorRequestException;
 import com.dentalClinic.exceptions.NotFoundException;
@@ -11,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.SecondaryTable;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class AppointmentController {
@@ -50,8 +53,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointments")
-    public ResponseEntity<List<Appointment>> searchAllAppointments() {
-        return ResponseEntity.ok(appointmentService.searchAllAppointments());
+    public Set<AppointmentDTO> searchAllAppointments() {
+        return appointmentService.searchAllAppointments();
     }
 
     @DeleteMapping("/appointment/{id}")

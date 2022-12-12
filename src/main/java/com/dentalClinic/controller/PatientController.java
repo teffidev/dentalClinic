@@ -1,5 +1,6 @@
 package com.dentalClinic.controller;
 
+import com.dentalClinic.dto.PatientDTO;
 import com.dentalClinic.entity.Patient;
 import com.dentalClinic.exceptions.NotFoundException;
 import com.dentalClinic.service.impl.PatientServiceImpl;
@@ -38,9 +39,8 @@ public class PatientController {
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<Patient> findPatientById(@PathVariable Long id) throws NotFoundException {
-        Patient patient = patientService.findPatientById(id);
-        return ResponseEntity.ok(patient);
+    public PatientDTO findPatientById(@PathVariable Long id) throws NotFoundException {
+        return patientService.findPatientById(id);
     }
 
     @GetMapping("/patients")

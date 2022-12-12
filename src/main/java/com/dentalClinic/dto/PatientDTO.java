@@ -7,17 +7,21 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PatientDTO {
 
+    private Long id;
     private String name;
     private String lastname;
-    private Date admissionDate;
 
     public PatientDTO() {
     }
 
-    public PatientDTO(String name, String lastname, Date admissionDate) {
+    public PatientDTO(Long id, String name, String lastname) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
-        this.admissionDate = admissionDate;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -36,20 +40,12 @@ public class PatientDTO {
         this.lastname = lastname;
     }
 
-    public Date getAdmissionDate() {
-        return admissionDate;
-    }
-
-    public void setAdmissionDate(Date admisionDate) {
-        this.admissionDate = admisionDate;
-    }
-
     @Override
     public String toString() {
         return "PatientDTO{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", admissionDate=" + admissionDate +
                 '}';
     }
 }

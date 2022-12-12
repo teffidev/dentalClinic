@@ -1,15 +1,18 @@
 package com.dentalClinic.service.impl;
 
+import com.dentalClinic.dto.DentistDTO;
 import com.dentalClinic.entity.Dentist;
 import com.dentalClinic.exceptions.NotFoundException;
 import com.dentalClinic.repository.DentistRepository;
 import com.dentalClinic.service.DentistService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DentistServiceImpl implements DentistService {
@@ -17,11 +20,14 @@ public class DentistServiceImpl implements DentistService {
     private static final Logger LOGGER = Logger.getLogger(DentistServiceImpl.class);
 
     private final DentistRepository dentistRepository;
+    private final ObjectMapper mapper;
 
     @Autowired
-    public DentistServiceImpl(DentistRepository dentistRepository) {
+    public DentistServiceImpl(DentistRepository dentistRepository, ObjectMapper mapper) {
         this.dentistRepository = dentistRepository;
+        this.mapper = mapper;
     }
+
 
     public Dentist dentistRecord(Dentist dentist) {
         LOGGER.info("Registration method of a dentist");
@@ -32,11 +38,18 @@ public class DentistServiceImpl implements DentistService {
         return dentistRepository.save(dentist);
     }
 
-    public Dentist findDentistById(Long id) throws NotFoundException {
-        if (dentistRepository.findById(id).isEmpty()) {
-            throw new NotFoundException("There is not dentist with id: " + id);
+    public DentistDTO findDentistById(Long id) throws NotFoundException {
+
+        Optional<Dentist> dentist = dentistRepository.findById(id);
+        DentistDTO dentistDTO;
+
+        if (dentist.isEmpty()) {
+            LOGGER.error("ERROR! Dentist with Id " + id + " was not found");
+            throw new NotFoundException("Dentist with Id " + id + " was not found");
+        } else {
+            dentistDTO = mapper.convertValue(dentist, DentistDTO.class);
         }
-        return dentistRepository.findById(id).get();
+        return dentistDTO;
     }
 
     public List<Dentist> searchAllDentists(){

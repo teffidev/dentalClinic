@@ -1,5 +1,7 @@
 package com.dentalClinic.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,12 +19,12 @@ public class Dentist {
     private String license;
 
 
-    @OneToMany(mappedBy = "dentist", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dentist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Appointment> appointments;
 
 
     public Dentist(){
-
     }
 
     public Dentist(String name, String lastname, String license) {
@@ -30,6 +32,22 @@ public class Dentist {
         this.lastname = lastname;
         this.license = license;
     }
+
+    public Dentist(Long id, String name, String lastname, String license) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.license = license;
+    }
+
+    public Dentist(Long id, String name, String lastname, String license, List<Appointment> appointments) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.license = license;
+        this.appointments = appointments;
+    }
+
 
     public Long getId() {
         return id;

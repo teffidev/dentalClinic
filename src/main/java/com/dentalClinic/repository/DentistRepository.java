@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface DentistRepository extends JpaRepository<Dentist, Long> {
 
-    @Query("SELECT d.name FROM Dentist d WHERE d.name = ?1")
+    @Query("SELECT d.name FROM Dentist d WHERE d.name = ?1") /*HQL-Spring Boot*/
     Optional<Dentist> searchName(String name);
 
 }

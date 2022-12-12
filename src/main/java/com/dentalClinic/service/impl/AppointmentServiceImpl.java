@@ -1,5 +1,6 @@
 package com.dentalClinic.service.impl;
 
+import com.dentalClinic.dto.AppointmentDTO;
 import com.dentalClinic.entity.Appointment;
 import com.dentalClinic.entity.Dentist;
 import com.dentalClinic.entity.Patient;
@@ -9,14 +10,12 @@ import com.dentalClinic.repository.AppointmentRepository;
 import com.dentalClinic.repository.DentistRepository;
 import com.dentalClinic.repository.PatientRepository;
 import com.dentalClinic.service.AppointmentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -26,12 +25,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final DentistRepository dentistRepository;
     private final PatientRepository patientRepository;
+    private final ObjectMapper mapper;
 
     @Autowired
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, DentistRepository dentistRepository, PatientRepository patientRepository) {
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, DentistRepository dentistRepository, PatientRepository patientRepository, ObjectMapper mapper) {
         this.appointmentRepository = appointmentRepository;
         this.dentistRepository = dentistRepository;
         this.patientRepository = patientRepository;
+        this.mapper = mapper;
     }
 
 
@@ -60,8 +61,13 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findById(id).get();
     }
 
-    public List<Appointment> searchAllAppointments(){
-        return appointmentRepository.findAll();
+    public Set<AppointmentDTO> searchAllAppointments(){
+        List<Appointment> appointments = appointmentRepository.findAll();
+        Set<AppointmentDTO> appointmentDTOS = new HashSet<>();
+        for (Appointment appointment : appointments) {
+            appointmentDTOS.add(mapper.convertValue(appointment, AppointmentDTO.class));
+        }
+        return appointmentDTOS;
     }
 
     public void removeAppointment(Long id) throws NotFoundException {

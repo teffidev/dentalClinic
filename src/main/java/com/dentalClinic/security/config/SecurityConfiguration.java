@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-/*Aquí es donde se hace toda nuestra seguridad*/
+/*This is where all our security is made*/
 
 @Configuration
 @EnableWebSecurity
@@ -37,16 +37,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/user/**").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().ignoringAntMatchers().ignoringAntMatchers("/h2-console/")
-                .and().headers().frameOptions().sameOrigin()
-                .and().httpBasic();
+                .authorizeRequests().antMatchers("/user/**", "/dentist/**", "/patient/**", "appointment/**").permitAll()
+                .anyRequest()
+                .authenticated().and()
+                .formLogin();
     }
 
-    /*Este método me ayuda a crear un objeto para Spring
-     de tipo DaoAuthenticationProvider... y le paso el usuario
-     y la contraseña*/
+    /*This method helps me create an object for Spring
+     of type DaoAuthenticationProvider... and I pass it the username
+     and the password*/
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

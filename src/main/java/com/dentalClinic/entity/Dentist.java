@@ -3,6 +3,7 @@ package com.dentalClinic.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,7 @@ public class Dentist {
     private Long id;
     private String name;
     private String lastname;
+    @NotBlank
     @Column(name = "num_license")
     private String license;
 

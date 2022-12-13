@@ -3,6 +3,8 @@ package com.dentalClinic.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,8 @@ public class Patient {
     private String name;
     private String lastname;
     private String address;
+    @NotBlank
+    @Size(min = 0, max = 20)
     private String dni;
     private Date admissionDate;
 

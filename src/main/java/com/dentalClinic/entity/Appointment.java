@@ -3,6 +3,8 @@ package com.dentalClinic.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -13,6 +15,8 @@ public class Appointment {
     @SequenceGenerator(name = "appointment_sequence", sequenceName = "appointment_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "appointment_sequence")
     private Long id;
+    @NotBlank
+    @Size(min = 0, max = 20)
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)

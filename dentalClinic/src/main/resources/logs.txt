@@ -14,3 +14,11 @@ INFO    2022-12-12 15:46:31,917 [main] com.dentalClinic.service.impl.DentistServ
 INFO    2022-12-12 15:46:31,921 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
 INFO    2022-12-12 15:46:31,922 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
 INFO    2022-12-12 15:46:31,923 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
+INFO    2022-12-13 18:34:36,525 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a dentist
+INFO    2022-12-13 18:34:36,534 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a dentist
+INFO    2022-12-13 18:34:36,536 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a dentist
+INFO    2022-12-13 18:34:36,538 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a dentist
+INFO    2022-12-13 18:34:36,540 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
+INFO    2022-12-13 18:34:36,545 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
+INFO    2022-12-13 18:34:36,546 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
+INFO    2022-12-13 18:34:36,548 [main] com.dentalClinic.service.impl.DentistServiceImpl  - Registration method of a patient
